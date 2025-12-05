@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="text-center py-5">
+    <h1 class="display-4 mb-4">
+        Welcome to Django Unit Converter
+    </h1>
+    <p class="lead mb-5">
+        Choose a conversion category below
+    </p>
+
+    <div class="row justify-content-center">
+        <!-- LENGTH -->
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 shadow">
+                <div class="card-body text-center">
+                    <h3 class="card-title text-primary">
+                        Length
+                    </h3>
+                    <p class="card-text">mm . cm . m . km . in . ft . yd . mi</p>
+                    <a href="{% url 'converter:length' %}" class="btn btn-primary">
+                        Go ->
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- WEIGHT -->
+         <div class="col-md-3 mb-4">
+            <div class="card h-100 shadow">
+                <div class="card-body text-center">
+                    <h3 class="card-title text-success">
+                        Weight
+                    </h3>
+                    <p class="card-text">mg . g . kg . oz . lb</p>
+                    <a href="{% url 'converter:weight' %}" class="btn btn-success">
+                        Go ->
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- TEMPERATURE -->
+         <div class="col-md-3 mb-4">
+            <div class="card h-100 shadow">
+                <div class="card-body text-center">
+                    <h3 class="card-title text-warning">
+                        Temperature
+                    </h3>
+                    <p class="card-text">Celcius . Fahrenheit . Kelvin</p>
+                    <a href="{% url 'converter:temperature' %}" class="btn btn-warning">
+                        Go ->
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
