@@ -38,3 +38,20 @@ def convert_weight(value, from_unit, to_unit):
     # convert grams to target unit
     result = value_in_grams / WEIGHT_TO_GRAMS[to_unit]
     return result
+
+def convert_temperature(value, from_unit, to_unit):
+    """Convert a temperature value from one unit to another."""
+
+    if from_unit == 'celsius':
+        celsius = value
+    elif from_unit == 'fahrenheit':
+        celsius = (value - 32) * 5/9
+    elif from_unit == 'kelvin':
+        celsius = value - 273.15
+
+    if to_unit == 'celsius':
+        return celsius
+    elif to_unit == 'fahrenheit':
+        return (celsius * 9/5) + 32
+    elif to_unit == 'kelvin':
+        return celsius + 273.15
