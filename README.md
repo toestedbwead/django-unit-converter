@@ -1,22 +1,46 @@
 # Django Unit Converter
 
-A clean, professional unit converter web app (v1 = no database).
+A simple unit conversion web app built with Django.
 
-Supports Length • Weight • Temperature conversions.
+Supports conversion between units of length, weight, and temperature. No database used.
 
-Built to practice:
-- Django project/app structure
-- Class-based views
-- Django forms
-- Clean URLs & templates
-- Professional git workflow
-- Tests
+## Features
 
-## Quick start
+- Home page with links to converters
+- Separate pages for:
+  - Length (mm, cm, m, km, inch, foot, yard, mile)
+  - Weight (mg, g, kg, oz, lb)
+  - Temperature (Celsius, Fahrenheit, Kelvin)
+- Form input with validation
+- Results displayed on the same page after submission
+- Responsive design using Bootstrap 5
+- Clean URLs and active navigation
+
+## Tech Stack
+
+- Python
+- Django
+- Bootstrap 5 (via CDN)
+
+## Setup and Run
+
 ```bash
-git clone https://github.com/yourusername/django-unit-converter.git
+git clone https://github.com/toestedbwead/django-unit-converter.git
 cd django-unit-converter
 python -m venv venv
-source venv/bin/activate
+source venv/bin/activate    # On Windows: venv\Scripts\activate
 pip install django
 python manage.py runserver
+```
+
+**Home Page**
+![Home Page](screenshots/homepageunitconverter.png)
+**Length Page**
+![Length Converter (with result)](screenshots/lengthpage.png)
+**Weight Page**
+![Weight Converter (with result)](screenshots/weightpage.png)
+**Temperature Page**
+![Temperature Converter (with result)](screenshots/temperaturepage.png)
+
+this project is based on:
+https://roadmap.sh/projects/unit-converter
