@@ -5,7 +5,8 @@ from .forms import LengthForm
 from .conversion import convert_length
 from .forms import WeightForm
 from .conversion import convert_weight
-
+from .forms import TemperatureForm
+from .conversion import convert_temperature
 
 # home view
 class HomeView(TemplateView):
@@ -70,5 +71,30 @@ class WeightView(View):
             return render(request, 'converter/weight.html', {'form': form})
 
 # temperature view
-class TemperatureView(TemplateView):
-    template_name = 'converter/temperature.html'
+class TemperatureView(View):
+    def get(self, request):
+        form = TemperatureForm()
+        return render(request, 'converter/temperature.html', {'form': form})
+    
+    def post(self, request):
+        form = TemperatureForm(request.POST)
+
+        if form.is_valid():
+            value = form.cleaned_data['value']
+            from_unit = form.cleaned_data['from_unit']
+            to_unit = form.cleaned_data['to_unit']
+
+            result = convert_temperature(value, from_unit, to_unit)
+
+            context = {
+                'form': form,
+                'result': result,
+                'value': value,
+                'from_unit': from_unit,
+                'to_unit': to_unit,
+            }
+
+            return render(request, 'converter/temperature.html', context)
+        
+        else:
+            return render(request, 'converter/temperature.html', {'form': form})
