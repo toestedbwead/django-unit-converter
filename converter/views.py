@@ -3,6 +3,9 @@ from django.views.generic import TemplateView
 from django.views import View
 from .forms import LengthForm
 from .conversion import convert_length
+from .forms import WeightForm
+from .conversion import convert_weight
+
 
 # home view
 class HomeView(TemplateView):
@@ -38,8 +41,33 @@ class LengthView(View):
             return render(request, 'converter/length.html', {'form': form})
         
 # weight view
-class WeightView(TemplateView):
-    template_name = 'converter/weight.html'
+class WeightView(View):
+    def get(self, request):
+        form = WeightForm()
+        return render(request, 'converter/weight.html', {'form': form})
+    
+    def post(self, request):
+        form = WeightForm(request.POST)
+
+        if form.is_valid():
+            value = form.cleaned_data['value']
+            from_unit = form.cleaned_data['from_unit']
+            to_unit = form.cleaned_data['to_unit']
+
+            result = convert_weight(value, from_unit, to_unit)
+
+            context = {
+                'form': form,
+                'result': result,
+                'value': value,
+                'from_unit': from_unit,
+                'to_unit': to_unit,
+            }
+
+            return render(request, 'converter/weight.html', context)
+        
+        else:
+            return render(request, 'converter/weight.html', {'form': form})
 
 # temperature view
 class TemperatureView(TemplateView):
