@@ -87,3 +87,38 @@ class WeightForm(forms.Form):
         
         return cleaned_data
     
+
+TEMPERATURE_UNITS = [
+    ('celsius', 'Celsius'),
+    ('fahrenheit', 'Fahrenheit'),
+    ('kelvin', 'Kelvin')
+]
+
+class TemperatureForm(forms.Form):
+    value = forms.FloatField(label = 'Value to Convert',
+    required=True,
+    error_messages = {'required': 'Please enter a value.',
+    'invalid': 'Please enter a valid number.'
+    })
+
+    from_unit = forms.ChoiceField(
+        label = 'From Unit',
+        choices = TEMPERATURE_UNITS,
+    )
+
+    to_unit = forms.ChoiceField(
+        label = 'To Unit',
+        choices = TEMPERATURE_UNITS
+    )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        from_unit = cleaned_data.get('from_unit')
+        to_unit = cleaned_data.get('to_unit')
+
+        if from_unit and to_unit and from_unit == to_unit:
+            raise forms.ValidationError(
+                'Cannot convert a unit to itself. Please select different units.'
+            )
+        
+        return cleaned_data
